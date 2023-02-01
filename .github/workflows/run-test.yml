@@ -22,4 +22,7 @@ jobs:
         if: success()
         uses: appleboy/ssh-action@master
         with:
-          super_secret: ${{ secrets.SuperSecret }}  
+          host: ${{ env.REMOTE_SERVER }}
+          username: ${{ env.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          private_key: ${{ secrets.SUPER_SECRET }}  
