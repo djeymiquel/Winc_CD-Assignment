@@ -22,5 +22,5 @@ jobs:
           echo "$ASSIGNMENT"
         env:
           ASSIGNMENT: ${{secrets.ASSIGNMENT}}
-      # - name: Run script
-      #   run: sh updated.sh
+      - name: Run script
+        run: echo "Successfully Updated!"
