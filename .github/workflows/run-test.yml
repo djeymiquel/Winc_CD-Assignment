@@ -24,7 +24,7 @@ jobs:
         env:
           ASSIGNMENT: ${{secrets.ASSIGNMENT}}
       - name: Run your script
-        run: bash /home/cd-assignment/updated.sh
+        run: ./updated.sh
 
           
           
