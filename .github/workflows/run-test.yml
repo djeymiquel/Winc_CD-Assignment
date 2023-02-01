@@ -19,8 +19,8 @@ jobs:
         run: pytest
 
       - name: Login to Remote Server (if tests pass)
-        run: |
-          echo "$ASSIGNMENT"
+        # run: |
+        #   echo "$ASSIGNMENT"
         with: 
           ASSIGNMENT: ${{secrets.ASSIGNMENT}}
           script: echo "file is updated!!"
