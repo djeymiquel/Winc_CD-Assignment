@@ -24,4 +24,4 @@ jobs:
         env:
           ASSIGNMENT: ${{secrets.ASSIGNMENT}}
       - name: Run script
-        run: ./updated.sh
+        run: sh /home/cd-assignment/updated.sh
