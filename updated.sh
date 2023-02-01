@@ -2,5 +2,5 @@
 
 
 git pull
-systemctl restart cd-assignment.service
+sudo systemctl restart cd-assignment.service
 echo 'succesfully updated!'
