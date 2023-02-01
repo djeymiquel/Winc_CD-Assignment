@@ -12,4 +12,3 @@ def index():
 @app.route('/assignment')
 def assignment():
     return 'This is my final assignment!'
-
