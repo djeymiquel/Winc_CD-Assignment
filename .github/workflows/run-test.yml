@@ -19,7 +19,6 @@ jobs:
         run: pytest
 
       - name: Login to Remote Server (if tests pass)
-        if: success()
         env:
           ASSIGNMENT:${{secrets.ASSIGNMENT}}
 
