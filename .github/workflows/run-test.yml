@@ -23,4 +23,4 @@ jobs:
         env:
           ASSIGNMENT: ${{secrets.ASSIGNMENT}}
       - name: Run script
-        bash_command: "echo Successfully Updated!"
+        command: "echo Successfully Updated!"
