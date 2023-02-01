@@ -21,9 +21,9 @@ jobs:
       - name: Login to Remote Server (if tests pass)
         run: |
           echo "$ASSIGNMENT"
-        env: 
+        with: 
           ASSIGNMENT: ${{secrets.ASSIGNMENT}}
-        script: echo "file is updated!!"
+          script: echo "file is updated!!"
           
 
         # uses: appleboy/ssh-action@master
