@@ -20,9 +20,12 @@ jobs:
 
       - name: Login to Remote Server (if tests pass)
         if: success()
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ env.REMOTE_SERVER }}
-          username: ${{ env.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          private_key: ${{ secrets.SUPER_SECRET }}  
+        env:
+          ASSIGNMENT:${{secrets.ASSIGNMENT}}
+
+        # uses: appleboy/ssh-action@master
+        # with:
+        #   host: ${{ env.REMOTE_SERVER }}
+        #   username: ${{ env.USERNAME }}
+        #   password: ${{ secrets.PASSWORD }}
+        #   private_key: ${{ secrets.SUPER_SECRET }}  
