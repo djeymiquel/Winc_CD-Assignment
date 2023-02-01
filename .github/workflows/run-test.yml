@@ -23,15 +23,5 @@ jobs:
           echo "$ASSIGNMENT"
         env:
           ASSIGNMENT: ${{secrets.ASSIGNMENT}}
-      - name: Run your script
+      - name: Run script
         run: ./updated.sh
-
-          
-          
-
-        # uses: appleboy/ssh-action@master
-        # with:
-        #   host: ${{ env.REMOTE_SERVER }}
-        #   username: ${{ env.USERNAME }}
-        #   password: ${{ secrets.PASSWORD }}
-        #   private_key: ${{ secrets.SUPER_SECRET }}  
