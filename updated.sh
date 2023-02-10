@@ -1,5 +1,5 @@
 #!/usr/bin/bash
 
 git pull
-sudo systemctl restart nginx
+sudo systemctl restart cd-assignment.service
 

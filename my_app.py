@@ -24,6 +24,3 @@ def assignment():
     title = "Assignment"
     return render_template('assignment.html', title=title)
     
-
-# if __name__ == "__main__":
-#     app.run(debug=True)
