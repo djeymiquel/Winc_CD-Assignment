@@ -1,0 +1,18 @@
+body {
+    background-color:lightblueq;
+    margin: 0 auto;
+    max-width: 720px;
+    font-size: 18px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.largeText {
+    font-size: 24px;
+}
+
+.boldText {
+    font-weight: bold;
+}
