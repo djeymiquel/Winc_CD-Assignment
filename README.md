@@ -106,5 +106,5 @@ eval "$(ssh-agent -s)"
 ### **add ssh key to ssh agent**
 
 ```bash:
-ssh-add ~/.ssh/id_ed25519
+ssh-add ~/.ssh/id_ed25519 
 ```
