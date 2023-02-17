@@ -76,6 +76,7 @@ tomli==2.0.1
 Werkzeug==2.2.2
 zipp==3.12.0
 ```
+
 When working in a python env we install all necessary moduls for our project.
 when we use pip freeze we can see all the modules in our envirement.
 to have this modules we can use pip freeze requirements.txt to save all the modules in this text file.
