@@ -15,7 +15,7 @@ jobs:
       - name: Set SSH Key Environment Variable
         run: echo "${{ secrets.ASSIGNMENT }}"
         env:
-          ASSIGNMENT: ${{secrets.ASSIGNMENT}}
+          # ASSIGNMENT: ${{secrets.ASSIGNMENT}}
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           key: ${{secrets.PASSWORD}}
