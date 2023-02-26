@@ -13,8 +13,12 @@ jobs:
         run: pytest
 
       - name: Login to Remote Server (if tests pass)
-        run: |
-          echo "$ASSIGNMENT"
-        env:
-          ASSIGNMENT: ${{secrets.ASSIGNMENT}}
+        if: ${{ success() }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.ASSIGNMENT }}
+          port: $ {{ secrets.PORT }}
+          script: whoami
           
