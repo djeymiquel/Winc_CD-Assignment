@@ -15,12 +15,12 @@ jobs:
       - name: Log in to remote server via SSH
         uses: appleboy/ssh-action@master
         env: ${{ secrets.ASSIGNMENT }}
-        with:
-          host: ${{ secrets.HOSTNAME }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            echo "Logged in via SSH"
-            whoami
+        # with:
+        #   host: ${{ secrets.HOSTNAME }}
+        #   username: ${{ secrets.USERNAME }}
+        #   key: ${{ secrets.SSH_PRIVATE_KEY }}
+        #   port: ${{ secrets.PORT }}
+        #   script: |
+        #     echo "Logged in via SSH"
+        #     whoami
 
