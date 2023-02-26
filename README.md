@@ -24,6 +24,7 @@ scp -r (dir) root@(SERVER_IP):/home/
 
 ```yaml:
 name: Run tests
+# Run this workflow whenever something new is pushed.
 on: push
 jobs:
   run-tests:
@@ -31,20 +32,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8.10'
       - name: Install Dependencies
         run: pip install -r requirements.txt
       - name: Run tests
         run: pytest
 
-      - name: Login to Remote Server
-        run: |
-          echo "$ASSIGNMENT"
-        env:
-          ASSIGNMENT: ${{secrets.ASSIGNMENT}}
+      - name: Log in to remote server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PASS }}
+          port: ${{ secrets.PORT }}
+          script: |
+            echo "Logged in via SSH"
 ```
 
 This is a **YAML** file, a human-readable data serialization format commonly used for configuration files. The code above sets up a **Github Actions** workflow named *"run tests"*. The workflow is triggered whenever there is a new push to the repository.
@@ -79,26 +80,35 @@ zipp==3.12.0
 
 When working in a python env we install all necessary moduls for our project.
 when we use pip freeze we can see all the modules in our envirement.
-to have this modules we can use pip freeze requirements.txt to save all the modules in this text file.
+to save this modules ina a text file, we can use pip freeze requirements.txt from this file all depenidies can be installed.
 
 *"Run tests":* This step uses a shell command to run "pytest", which runs the tests in the repository.
 
-*"Login to Remote Server (if tests passes)":* This step uses a shell command to print out the value of the "ASSIGNMENT" environment variable. The value of this variable is set from the "secrets.ASSIGNMENT" Github Actions secret, which allows me to store sensitive information, such as passwords or API keys, securely within my Github Actions workflow.
-
-This workflow is set up to perform a basic continuous deployment pipeline: it checks out the code, sets up the environment, installs dependencies, runs tests, and logs into a remote server if the tests pass and updates the code with a pull request from a **.sh** file.
+*"Login to Remote Server via SSH":* appleboy/ssh-action is a GitHub Action that allows you to run SSH commands on a remote server from a GitHub Actions workflow
 
 ## Generating SSH key and adding it to the ssh-agent
 
-To login to github without login in manually entering a passprase
-we need to generate a **SSH** key and add it to the ssh-agent
+To login to the remote server without manually entering a passphrase
+we need to generate a **SSH** key and add it to the ssh-agent the command for this is in the example below:
 
 ### **generate ssh key github in .ssh folder root dir**
 
 ```bash:
-ssh-keygen -t ed25519 -C "email@example.com
+ssh-keygen -t ed25519 -C "email@example.com"
 ```
 
+After generating the key we need to copy it to the remote directory
+by using this command:
+
+```bash:
+ssh-copy-id user@<remote server>
+```
+
+the remote server will save this file in the .ssh folder under the name authorized_keys
+
 ### **Start ssh-agent**
+
+SSH agent is a program that runs in the background and manages SSH private keys used for authentication when logging into remote servers.
 
 ```bash:
 eval "$(ssh-agent -s)"
@@ -106,6 +116,15 @@ eval "$(ssh-agent -s)"
 
 ### **add ssh key to ssh agent**
 
+this command will add a key to the ssh agent.
+
 ```bash:
 ssh-add ~/.ssh/id_ed25519 
 ```
+
+In this assignment i didn't came across alot of difficult issues.
+the steps where good to follow for this basic application.
+I've learned about yaml config files, generating a ssh key and how to use github repository secrets.
+The only part that was a little challenging was the part where i needed to figure out what the correct way was to copy the ssh key into the remote server.
+First i tryed to do a normal copy of the ssh key and pasted that into the remote server, it did not work.
+So i googled for a solution and came across a video explaining how to copy ssh to the server and it worked !!
