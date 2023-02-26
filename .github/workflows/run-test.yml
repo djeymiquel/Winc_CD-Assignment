@@ -12,11 +12,14 @@ jobs:
       - name: Run tests
         run: pytest
 
-      - name: Log in with SSH Key to remote server
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.PASSWORD }}
-          ARGS: 'whoami'
-          HOST: ${{ secrets.HOSTNAME }}
-          USERNAME: ${{ secrets.USERNAME }}
-          
+      - name: Log in to remote server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            echo "Logged in via SSH"
+            whoami
+
