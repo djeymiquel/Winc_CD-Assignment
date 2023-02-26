@@ -12,13 +12,11 @@ jobs:
       - name: Run tests
         run: pytest
 
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.4.0
+        with:
+          ssh-private-key: ${{ secrets.ASSIGNMENT }}
       - name: Login to Remote Server (if tests pass)
         if: ${{ success() }}
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOSTNAME }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: whoami
+        run: ssh user@hostname 'whoami'
           
