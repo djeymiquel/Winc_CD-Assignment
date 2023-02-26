@@ -12,11 +12,18 @@ jobs:
       - name: Run tests
         run: pytest
 
-      - name: Set up SSH agent
-        uses: webfactory/ssh-agent@v0.4.0
+      - name: Set SSH Key Environment Variable
+        run: echo "$ASSIGNMENT" >> $GITHUB_ENV
+        env:
+          ASSIGNMENT: ${{secrets.ASSIGNMENT}}
+
+      - name: SSH to Remote Server (if tests pass)
+        if: success()
+        uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.ASSIGNMENT }}
-      - name: Login to Remote Server (if tests pass)
-        if: ${{ success() }}
-        run: ssh user@hostname 'whoami'
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ env.ASSIGNMENT }}
+          port: ${{ secrets.PORT }}
+          script: whoami
           
