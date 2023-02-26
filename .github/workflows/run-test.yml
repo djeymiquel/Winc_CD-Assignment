@@ -12,13 +12,11 @@ jobs:
       - name: Run tests
         run: pytest
 
-      - name: Set SSH Key Environment Variable
-        run: echo "${{ secrets.ASSIGNMENT }}"
+      - name: Log in with SSH Key to remote server
+        uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          # ASSIGNMENT: ${{secrets.ASSIGNMENT}}
-          host: ${{ secrets.HOSTNAME }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{secrets.PASSWORD}}
-          port: ${{ secrets.PORT }}
-          script: whoami
+          SSH_PRIVATE_KEY: ${{ secrets.PASSWORD }}
+          ARGS: 'whoami'
+          HOST: ${{ secrets.HOSTNAME }}
+          USERNAME: ${{ secrets.USERNAME }}
           
