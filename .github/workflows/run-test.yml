@@ -19,7 +19,7 @@ jobs:
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PASS }}
-          port: ${{ secrets.PORT }}
+          # port: ${{ secrets.PORT }}
           script: |
             echo "Logged in via SSH"
             whoami
