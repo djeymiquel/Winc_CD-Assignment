@@ -12,7 +12,7 @@ jobs:
       - name: Run tests
         run: pytest
 
-        env: ${{ secrets.ASSIGNMENT }}
+        # env: ${{ secrets.ASSIGNMENT }}
       - name: Log in to remote server via SSH
         uses: appleboy/ssh-action@master
         with:
