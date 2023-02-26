@@ -12,9 +12,18 @@ jobs:
       - name: Run tests
         run: pytest
 
-      - name: Login to Remote Server (if tests pass)
-        run: |
-          echo "$ASSIGNMENT"
+      - name: Set SSH Key Environment Variable
+        run: echo "${{ secrets.ASSIGNMENT }}"
         env:
           ASSIGNMENT: ${{secrets.ASSIGNMENT}}
+
+      - name: SSH to Remote Server (if tests pass)
+        if: success()
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{secrets.ASSIGNMENT}}
+          port: ${{ secrets.PORT }}
+          script: whoami
           
