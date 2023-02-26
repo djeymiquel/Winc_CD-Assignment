@@ -23,7 +23,7 @@ jobs:
         with:
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ env.ASSIGNMENT }}
+          key: ${{secrets.ASSIGNMENT}}
           port: ${{ secrets.PORT }}
           script: whoami
           
