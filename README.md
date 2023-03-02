@@ -24,8 +24,11 @@ scp -r (dir) root@(SERVER_IP):/home/
 
 ```yaml:
 name: Run tests
-# Run this workflow whenever something new is pushed.
-on: push
+on:
+  push:
+   branches:
+     - "main"
+
 jobs:
   run-tests:
     runs-on: ubuntu-20.04
@@ -45,7 +48,9 @@ jobs:
           key: ${{ secrets.PASS }}
           port: ${{ secrets.PORT }}
           script: |
-            echo "Logged in via SSH"
+            cd /home/cd-assignment
+            git pull
+            sudo systemctl restart cd-assignment.service
 ```
 
 This is a **YAML** file, a human-readable data serialization format commonly used for configuration files. The code above sets up a **Github Actions** workflow named *"run tests"*. The workflow is triggered whenever there is a new push to the repository.
@@ -91,7 +96,7 @@ to save this modules ina a text file, we can use pip freeze requirements.txt fro
 To login to the remote server without manually entering a passphrase
 we need to generate a **SSH** key and add it to the ssh-agent the command for this is in the example below:
 
-### **generate ssh key github in .ssh folder root dir**
+### **generate ssh key github in .ssh folder root directory**
 
 ```bash:
 ssh-keygen -t ed25519 -C "email@example.com"
@@ -122,9 +127,22 @@ this command will add a key to the ssh agent.
 ssh-add ~/.ssh/id_ed25519 
 ```
 
-In this assignment i didn't came across alot of difficult issues.
-the steps where good to follow for this basic application.
-I've learned about yaml config files, generating a ssh key and how to use github repository secrets.
-The only part that was a little challenging was the part where i needed to figure out what the correct way was to copy the ssh key into the remote server.
-First i tryed to do a normal copy of the ssh key and pasted that into the remote server, it did not work.
-So i googled for a solution and came across a video explaining how to copy ssh to the server and it worked !!
+In this assignment i came across some challenges.
+The biggest challenge was generating a ssh key and copy that in a correct way to the remote server the solution i found is the following command:
+
+```bash:
+ssh-copy-id user@<remote server>
+```
+
+This will save the ssh key on the remote server under the name authorized_keys
+that enables github actions to log in to the remote server
+everytime i push commits from my local repository.
+
+Another challenge was understanding the yaml configuration/serialization file syntax,
+after a couple of videos and some searches i gained some understanding.
+There is still alot to discover but for this assignment,
+i was able to implement the right code.
+
+Github actions had good documentation about how to use secrets.
+Also here is alot to discover and to play around with what i will definitely
+do!, but for this assignment i was able to understand and implement the right solution.
