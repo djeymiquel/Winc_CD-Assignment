@@ -1,1 +1,1 @@
-echo "file successfully updated"
+sudo echo "file successfully updated"
