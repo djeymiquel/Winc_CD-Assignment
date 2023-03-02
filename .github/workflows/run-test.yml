@@ -16,7 +16,7 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           source: "/home/djeymiquel/Winc/cd-assignment/Winc_CD-Assignment"
-          target: "/home/cd-assignment"
+          target: "/home"
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PASS }}
