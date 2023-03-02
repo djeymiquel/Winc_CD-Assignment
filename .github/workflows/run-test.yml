@@ -15,8 +15,8 @@ jobs:
       - name: Log in to remote server via SSH
         uses: appleboy/ssh-action@master
         with:
-          source: "/home/djeymiquel/Winc/cd-assignment/Winc_CD-Assignment"
-          target: "/home/cd-assignment"
+          local: "/home/djeymiquel/Winc/cd-assignment/Winc_CD-Assignment"
+          remote_path: "/home/cd-assignment"
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PASS }}
