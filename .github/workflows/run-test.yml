@@ -3,7 +3,7 @@ name: Run tests
 on:
   push:
    branches:
-     - "origin/main"
+     - "main"
 
 jobs:
   run-tests:
