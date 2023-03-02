@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-
+git commit -m "updated"
 git pull
-sudo systemctl restart cd-assignment.service
-
+sudo systemctl restart nginx
+echo "Succesfully updated"
