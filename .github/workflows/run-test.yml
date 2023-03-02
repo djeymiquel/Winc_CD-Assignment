@@ -12,6 +12,16 @@ jobs:
       - name: Run tests
         run: pytest
 
+      - name: Upload code to remote server
+        uses: appleboy/scp-action@master
+        with:
+          source: "/home/djeymiquel/Winc/cd-assignment/Winc_CD-Assignment"
+          target: "/home/cd-assignment"
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PASS }}
+          port: ${{ secrets.PORT }}
+
       - name: Log in to remote server via SSH
         uses: appleboy/ssh-action@master
         with:
@@ -19,5 +29,3 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PASS }}
           port: ${{ secrets.PORT }}
-          script: |
-            echo "Logged in via SSH"
